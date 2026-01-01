@@ -1,0 +1,530 @@
+:root {
+  --bg-color: #000000;
+  --bg-secondary: #0f0f0f;
+  --text-main: #ffffff;
+  --text-muted: #a0a0a0;
+  --color-yellow: #f8fba3;
+  --color-purple: #a87df2;
+  --color-card: #1a1a1a;
+  --color-card-hover: #222222;
+  --border-color: #333333;
+  --focus-outline: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --bg-color: #f0f2f5;
+  --bg-secondary: #ffffff;
+  --text-main: #111111;
+  --text-muted: #717171;
+  --color-purple: #000000;
+  --color-yellow: #f0f2f5;
+  --color-card: #ffffff;
+  --color-card-hover: #fafafa;
+  --border-color: #ebebeb;
+  --focus-outline: #222222;
+  --glass-bg: #ffffff;
+  --glass-border: #f0f0f0;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    flex-direction: column;
+    overflow-y: auto;
+    height: auto;
+  }
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+input,
+button {
+  outline: none;
+}
+
+/* Auth Layout */
+.auth-layout {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .auth-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Panels */
+.left-panel {
+  display: none;
+  background-color: var(--color-card);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.left-panel-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 0;
+}
+
+.left-panel-content {
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  .left-panel {
+    display: flex;
+  }
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  padding: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* Auth Form */
+.auth-container {
+  width: 100%;
+  max-width: 28rem;
+}
+
+.auth-header {
+  margin-bottom: 2rem;
+}
+
+.auth-title {
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+  color: var(--text-muted);
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+  width: 100%;
+}
+
+.input-label {
+  position: absolute;
+  top: -0.6rem;
+  left: 0.75rem;
+  background-color: var(--bg-color);
+  padding: 0 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  z-index: 10;
+  transition: color 0.2s;
+}
+
+.input-group:focus-within .input-label {
+  color: var(--color-purple);
+}
+
+.input-icon-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding-left: 0.75rem;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: #52525b;
+  transition: color 0.2s;
+}
+
+.input-group:focus-within .input-icon-wrapper {
+  color: var(--color-purple);
+}
+
+.input-field {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #27272a;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  color: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-field:focus {
+  border-color: var(--color-purple);
+}
+
+/* Buttons */
+.btn-primary {
+  width: 100%;
+  background-color: white;
+  color: black;
+  font-weight: 600;
+  padding: 0.75rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #e5e5e5;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-social:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+
+.divider {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #27272a;
+}
+
+.divider-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.social-buttons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-social {
+  flex: 1;
+  padding: 0.75rem;
+  background-color: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 9999px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.btn-social:hover {
+  background-color: #27272a;
+}
+
+.toggle-text {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  padding-left: 0.25rem;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+/* Utilities */
+.hidden {
+  display: none;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+/* Animated Grid */
+.animated-grid-container {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 2/3;
+  position: relative;
+  z-index: 10;
+}
+
+.grid-card {
+  position: absolute;
+  width: calc(50% - 1rem);
+  height: calc(33.33% - 1rem);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.card-blur {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-purple {
+  background-color: var(--color-purple);
+  color: white;
+}
+
+.card-yellow {
+  background-color: #fef08a;
+  color: black;
+}
+
+.card-dark {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.card-icon-lg {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+/* Clerk Authentication Styling */
+.clerk-wrapper {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.clerk-root {
+  width: 100%;
+}
+
+.clerk-card {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Clerk form inputs */
+.cl-formFieldInput {
+  background-color: transparent !important;
+  border: 1px solid #27272a !important;
+  border-radius: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  color: white !important;
+  font-size: 0.875rem !important;
+}
+
+.cl-formFieldInput:focus {
+  border-color: var(--color-purple) !important;
+  outline: none !important;
+}
+
+/* Clerk buttons */
+.cl-formButtonPrimary {
+  background-color: white !important;
+  color: black !important;
+  font-weight: 600 !important;
+  padding: 0.75rem !important;
+  border-radius: 9999px !important;
+  width: 100% !important;
+  transition: background-color 0.2s !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background-color: #e5e5e5 !important;
+}
+
+/* Clerk labels */
+.cl-formFieldLabel {
+  color: var(--text-muted) !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Clerk text */
+.cl-headerTitle {
+  display: none !important;
+}
+
+.cl-headerSubtitle {
+  display: none !important;
+}
+
+.cl-footerActionText,
+.cl-footerActionLink {
+  color: var(--text-muted) !important;
+  font-size: 0.875rem !important;
+}
+
+.cl-footerActionLink {
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+.cl-footerActionLink:hover {
+  text-decoration: underline !important;
+}
+
+/* Clerk social buttons */
+.cl-socialButtonsBlockButton {
+  background-color: #18181b !important;
+  border: 1px solid #27272a !important;
+  border-radius: 9999px !important;
+  color: white !important;
+  padding: 0.75rem !important;
+}
+
+.cl-socialButtonsBlockButton:hover {
+  background-color: #27272a !important;
+}
+
+.cl-dividerRow {
+  margin: 2rem 0 !important;
+}
+
+.cl-dividerText {
+  color: var(--text-muted) !important;
+  font-size: 0.875rem !important;
+}
+
+.cl-dividerLine {
+  background-color: #27272a !important;
+}
+
+/* Error messages */
+.cl-formFieldErrorText {
+  color: #ef4444 !important;
+  font-size: 0.75rem !important;
+  margin-top: 0.25rem !important;
+}
+
+/* Internal styling */
+.cl-internal-b3fm6y {
+  background-color: transparent !important;
+}
